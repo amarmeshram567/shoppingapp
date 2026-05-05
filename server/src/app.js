@@ -20,12 +20,34 @@ app.disable("x-powered-by");
 app.use(helmet());
 app.use(compression());
 app.use(requestContext);
+
+const allowedOrigins = [
+  env.clientUrl,
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000"
+].filter(Boolean);
+
+
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin(origin, callback) {
+      // Allow non-browser and same-origin requests that do not send an Origin header.
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,11 +61,12 @@ app.use(
   })
 );
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use("/api", routes);
 app.get("/", (req, res) => {
   res.send("API is live")
 })
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api", routes);
+
 app.use(notFound);
 app.use(errorHandler);
 

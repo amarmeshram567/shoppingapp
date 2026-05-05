@@ -1,7 +1,8 @@
 import axios from "axios";
 import { toast } from "sonner";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://shoppingapp-xi.vercel.app/api";
+const API_URL = import.meta.env.VITE_API_URL || 'https://shoppingapp-xi.vercel.app/api';
+console.log(API_URL)
 
 export const api = axios.create({
   baseURL: API_URL,
