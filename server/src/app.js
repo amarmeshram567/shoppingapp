@@ -41,6 +41,9 @@ app.use(
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", routes);
+app.get("/", (req, res) => {
+  res.send("API is live")
+})
 app.use(notFound);
 app.use(errorHandler);
 

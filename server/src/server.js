@@ -3,6 +3,8 @@ import app from "./app.js";
 import { connectDB } from "./config/db.js";
 import { env } from "./config/env.js";
 
+console.log(env.port)
+
 const startServer = async () => {
   try {
     await connectDB();
