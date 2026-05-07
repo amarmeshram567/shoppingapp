@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 const API_URL = import.meta.env.DEV
   ? "/api"
-  : import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  : import.meta.env.VITE_API_URL || "https://shoppingapp-services.vercel.app/api";
 
 
 console.log(API_URL)
