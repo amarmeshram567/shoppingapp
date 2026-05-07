@@ -3,7 +3,11 @@ import { toast } from "sonner";
 
 const API_URL = import.meta.env.DEV
   ? "/api"
-  : import.meta.env.VITE_API_URL || "https://shoppingapp-jlnk.vercel.app/api";
+  : import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+
+console.log(API_URL)
+console.log(import.meta.env.VITE_API_URL)
 
 
 export const api = axios.create({

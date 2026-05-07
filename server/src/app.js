@@ -25,16 +25,14 @@ if (env.nodeEnv === "production") {
   app.set("trust proxy", 1);
 }
 
+
+const corsOptions = [
+  "http://localhost:5173"
+]
+
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests from configured frontends and non-browser callers.
-      if (!origin || env.clientUrls.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error(`CORS blocked for origin: ${origin}`));
-    },
+    origin: corsOptions,
     credentials: true
   })
 );
