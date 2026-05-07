@@ -27,7 +27,7 @@ if (env.nodeEnv === "production") {
 
 
 const corsOptions = [
-  "http://localhost:5173"
+  "http://localhost:5173", "https://shoppingapp-sepia.vercel.app"
 ]
 
 app.use(
