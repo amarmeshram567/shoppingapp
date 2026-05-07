@@ -5,7 +5,6 @@ const ADMIN_API_URL = import.meta.env.VITE_ADMIN_API_URL || "/api/admin-panel";
 
 export const adminApi = axios.create({
   baseURL: ADMIN_API_URL,
-  withCredentials: true,
   headers: {
     "Content-Type": "application/json"
   }
