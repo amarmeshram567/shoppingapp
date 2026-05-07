@@ -25,10 +25,20 @@ if (env.nodeEnv === "production") {
   app.set("trust proxy", 1);
 }
 
-app.use(cors({
-  origin: env.clientUrl,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests from configured frontends and non-browser callers.
+      if (!origin || env.clientUrls.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true
+  })
+);
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -45,7 +55,7 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("API is live")
-})
+});
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", routes);
 
