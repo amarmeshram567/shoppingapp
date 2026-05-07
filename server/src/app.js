@@ -25,7 +25,10 @@ if (env.nodeEnv === "production") {
   app.set("trust proxy", 1);
 }
 
-app.use(cors());
+app.use(cors({
+  origin: env.clientUrl,
+  credentials: true
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
