@@ -24,20 +24,6 @@ app.use(requestContext);
 if (env.nodeEnv === "production") {
   app.set("trust proxy", 1);
 }
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin(origin, callback) {
-//       // Allow non-browser tools and configured frontends.
-//       if (!origin || env.clientUrls.includes(origin)) {
-//         return callback(null, true);
-//       }
-
-//       return callback(new Error(`CORS blocked for origin: ${origin}`));
-//     }
-//   })
-// );
-
 
 app.use(cors());
 app.use(cookieParser());
