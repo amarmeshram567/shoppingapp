@@ -6,8 +6,8 @@ const API_URL = import.meta.env.DEV
   : import.meta.env.VITE_API_URL || "https://shoppingapp-services.vercel.app/api";
 
 
-console.log(API_URL)
-console.log(import.meta.env.VITE_API_URL)
+// console.log(API_URL)
+// console.log(import.meta.env.VITE_API_URL)
 
 
 export const api = axios.create({
